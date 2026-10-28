@@ -1,0 +1,21 @@
+{
+  "name": "gcc-homepage-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.12.0"
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=1 *.test.ts",
+    "check": "tsc --noEmit",
+    "content:validate": "node update.ts homepage.example.json",
+    "content:push": "node --env-file-if-exists=.env update.ts",
+    "smoke": "node --env-file-if-exists=.env smoke.ts"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.12",
+    "@types/node": "^24.19.2",
+    "typescript": "^7.0.2"
+  }
+}
