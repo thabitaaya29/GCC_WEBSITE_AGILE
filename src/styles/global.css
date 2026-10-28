@@ -1,6 +1,60 @@
 @import "tailwindcss";
 
-body {
-  margin: 0;
-  min-width: 320px;
+@theme {
+  --color-brand-green: #00b68c;
+  --color-brand-cream: #d8d9c2;
+  --color-brand-red: #b0242d;
+  --color-brand-red-hover: #941e26;
+  --color-brand-red-active: #7b1920;
+  --color-brand-blue: #3e6cc6;
+  --color-ink: #171717;
+  --color-muted: #525252;
+  --color-line: #d4d4d4;
+  --font-brand: "BUDGET", Arial, sans-serif;
+  --font-editorial: "Apple Garamond", Garamond, Georgia, serif;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    min-width: 320px;
+    font-family: var(--font-brand);
+    color: var(--color-ink);
+    background: #fff;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 { text-wrap: balance; }
+  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--color-brand-blue); outline-offset: 4px; }
+  ::selection { background: var(--color-brand-cream); color: var(--color-ink); }
+
+  @media (min-width: 768px) { body { font-size: 1.125rem; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .page-container { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 16px; }
+  .page-section { padding-block: 48px; }
+  .page-title { font-size: 36px; font-weight: 700; line-height: 1.1; }
+  .section-title { font-size: 28px; font-weight: 700; line-height: 1.2; }
+  .editorial-subheading { font-family: var(--font-editorial); font-size: 24px; font-style: italic; line-height: 1.3; }
+  .body-copy { max-width: 65ch; color: var(--color-muted); }
+  .text-link { color: var(--color-brand-blue); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* The source PNG has generous transparent margins; only the empty area is clipped. */
+  .brand-logo { position: relative; display: block; width: 180px; height: 64px; overflow: hidden; flex-shrink: 0; }
+  .brand-logo img { position: absolute; width: 200px; max-width: none; height: auto; left: -13px; top: -95px; }
+
+  @media (min-width: 768px) {
+    .page-container { padding-inline: 24px; }
+    .page-section { padding-block: 80px; }
+    .page-title { font-size: 56px; }
+    .section-title { font-size: 40px; }
+    .editorial-subheading { font-size: 32px; }
+  }
+  @media (min-width: 1024px) { .page-container { padding-inline: 32px; } }
 }

@@ -6,11 +6,11 @@ import GrowPage from "./pages/GrowPage";
 
 function HomePlaceholder() {
   return (
-    <main className="mx-auto max-w-7xl px-6 py-20">
-      <h1 className="text-4xl font-bold">
+    <main className="page-container page-section">
+      <h1 className="page-title">
         Welcome to GCC
       </h1>
-      <p className="mt-4 text-gray-600">
+      <p className="body-copy mt-4">
         Discover homepage sedang dikembangkan.
       </p>
     </main>

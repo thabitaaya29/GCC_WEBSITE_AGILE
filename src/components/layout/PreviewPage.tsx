@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { buttonStyles } from "../UI/button-styles";
 
 type PreviewPageProps = {
   title: string;
@@ -10,22 +11,22 @@ export default function PreviewPage({
   description,
 }: PreviewPageProps) {
   return (
-    <main className="mx-auto flex min-h-[70vh] max-w-4xl flex-col items-center justify-center px-6 text-center">
-      <span className="mb-4 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700">
+    <main className="page-container page-section flex min-h-[70vh] flex-col items-center justify-center text-center">
+      <span className="mb-6 rounded-full bg-brand-cream px-4 py-2 text-sm font-medium text-ink">
         Coming Soon
       </span>
 
-      <h1 className="mb-4 text-4xl font-bold text-gray-900">
+      <h1 className="page-title mb-4">
         {title}
       </h1>
 
-      <p className="mb-8 max-w-xl text-gray-600">
+      <p className="body-copy mb-8">
         {description}
       </p>
 
       <Link
         to="/"
-        className="rounded-lg bg-emerald-700 px-6 py-3 font-medium text-white hover:bg-emerald-800"
+        className={buttonStyles()}
       >
         Kembali ke Discover
       </Link>

@@ -2,19 +2,24 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router";
 import { Menu, X } from "lucide-react";
 import { navigation } from "../../data/navigation";
+import logoTransparent from "../../assets/brand/logo-transparent.png";
+import Button from "../UI/button";
+
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `inline-flex min-h-11 items-center rounded-lg px-2 text-base transition-colors duration-150 ${isActive ? "font-semibold text-brand-red underline underline-offset-8" : "text-muted hover:text-brand-red"}`;
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-50 border-b border-line bg-white" onKeyDown={(event) => { if (event.key === "Escape") setIsOpen(false); }}>
+      <nav aria-label="Navigasi utama" className="page-container flex items-center justify-between gap-4 py-3">
         <Link
           to="/"
-          className="text-xl font-bold text-gray-900"
+          className="brand-logo rounded-lg"
           onClick={() => setIsOpen(false)}
         >
-          GCC
+          <img src={logoTransparent} alt="Growth Consulting — Beranda" />
         </Link>
 
         {/* Desktop navigation */}
@@ -24,11 +29,7 @@ export default function Navbar() {
               key={item.path}
               to={item.path}
               end={item.path === "/"}
-              className={({ isActive }) =>
-                isActive
-                  ? "font-semibold text-emerald-700"
-                  : "text-gray-600 hover:text-emerald-700"
-              }
+              className={navLinkClass}
             >
               {item.label}
             </NavLink>
@@ -36,43 +37,40 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu toggle */}
-        <button
-          type="button"
-          className="rounded-lg p-2 md:hidden"
+        <Button
+          variant="ghost"
+          size="sm"
+          className="px-2 md:hidden"
           aria-label={isOpen ? "Tutup menu" : "Buka menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+        </Button>
       </nav>
 
       {/* Mobile navigation */}
-      {isOpen && (
-        <div
+        <nav
           id="mobile-navigation"
-          className="border-t border-gray-200 bg-white px-6 py-4 md:hidden"
+          aria-label="Navigasi mobile"
+          hidden={!isOpen}
+          className="border-t border-line bg-white md:hidden"
         >
-          <div className="flex flex-col gap-4">
+          <div className="page-container flex flex-col gap-2 py-4">
             {navigation.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 end={item.path === "/"}
                 onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-semibold text-emerald-700"
-                    : "text-gray-600 hover:text-emerald-700"
-                }
+                className={navLinkClass}
               >
                 {item.label}
               </NavLink>
             ))}
           </div>
-        </div>
-      )}
+        </nav>
     </header>
   );
 }
