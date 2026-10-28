@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "contentStatus": "example",
+  "notice": "Konten contoh untuk pengujian integrasi. Teks homepage belum disetujui PO.",
+  "hero": {
+    "title": "[Judul utama GCC untuk mahasiswa]",
+    "description": "[Penjelasan value GCC yang telah ditinjau PO]",
+    "ctaLabel": "Explore GCC",
+    "ctaHref": "#journey"
+  },
+  "about": {
+    "title": "Siapa Kita",
+    "description": "[Penjelasan GCC, manfaat untuk mahasiswa, consulting exposure, dan hubungan belajar dengan praktik]"
+  },
+  "journey": {
+    "title": "Learn, Apply, Grow",
+    "description": "[Pengantar perjalanan pengembangan mahasiswa]",
+    "items": [
+      { "slug": "learn", "label": "Learn", "description": "[Ringkasan tahap Learn — halaman masih preview Coming Soon]", "href": "/learn" },
+      { "slug": "apply", "label": "Apply", "description": "[Ringkasan tahap Apply — halaman masih preview Coming Soon]", "href": "/apply" },
+      { "slug": "grow", "label": "Grow", "description": "[Ringkasan tahap Grow — halaman masih preview Coming Soon]", "href": "/grow" }
+    ]
+  }
+}
