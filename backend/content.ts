@@ -1,14 +1,5 @@
-export interface HomepageContent {
-  schemaVersion: 1;
-  contentStatus: 'example' | 'approved';
-  notice: string;
-  hero: { title: string; description: string; ctaLabel: 'Explore GCC'; ctaHref: '#journey' };
-  about: { title: string; description: string };
-  journey: {
-    title: string; description: string;
-    items: { slug: 'learn' | 'apply' | 'grow'; label: 'Learn' | 'Apply' | 'Grow'; description: string; href: '/learn' | '/apply' | '/grow' }[];
-  };
-}
+import type { HomepageContent } from "../shared/homepage.ts";
+export type { HomepageContent } from "../shared/homepage.ts";
 
 function object(input: unknown, keys: string[], path: string): Record<string, unknown> {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error(`Invalid content: ${path} must be an object.`);

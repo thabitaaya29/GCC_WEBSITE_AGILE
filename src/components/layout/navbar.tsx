@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router";
 import { Menu, X } from "lucide-react";
 import { navigation } from "../../data/navigation";
-import logoTransparent from "../../assets/brand/logo-transparent.png";
+import logoLightsOut from "../../assets/brand/logo-lights-out.png";
 import Button from "../UI/button";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -19,7 +19,7 @@ export default function Navbar() {
           className="brand-logo rounded-lg"
           onClick={() => setIsOpen(false)}
         >
-          <img src={logoTransparent} alt="Growth Consulting — Beranda" />
+          <img src={logoLightsOut} alt="Growth Consulting — Beranda" />
         </Link>
 
         {/* Desktop navigation */}

@@ -2,18 +2,18 @@
 
 Website Growth Consulting (GCC), menggunakan React, Vite, TypeScript, Tailwind CSS v4, React Router, dan Lucide React.
 
-Sprint 1 berfokus pada Discover: menjelaskan value GCC dan membantu mahasiswa menemukan journey Learn → Apply → Grow. Learn/Apply/Grow masih preview berlabel Coming Soon. Login, backend, database, registrasi, assessment, dan detail program penuh berada di luar scope.
+Sprint 1 berfokus pada Discover: menjelaskan value GCC dan membantu mahasiswa menemukan journey Learn → Apply → Grow. Learn/Apply/Grow masih preview berlabel Coming Soon. Fondasi backend konten homepage Supabase sudah digabungkan. Login, registrasi, assessment, dan detail program penuh belum termasuk implementasi ini.
 
 ## Status
 
 - Foundation, navbar desktop/mobile, routing, preview pages, reusable Button, token desain, dan aset brand sudah terimplementasi.
-- Route `/` masih placeholder; homepage Developer A belum terintegrasi.
+- Backend konten Supabase tersedia di `backend/`; belum dihubungkan ke frontend. Route `/` masih placeholder; homepage Developer A belum terintegrasi.
 - Font masih fallback. Apple Garamond sudah diunduh untuk referensi; izin web dan identitas BUDGET belum dikonfirmasi.
 - QA visual/interaksi browser serta cross-review terintegrasi masih diperlukan. Implementasi kode bukan bukti seluruh acceptance criteria terpenuhi.
 
 ## Setup lokal
 
-Gunakan Node.js yang kompatibel dengan Vite 8: 20.19+ atau 22.12+. Pemeriksaan lokal sebelumnya menggunakan Node.js 24. npm diperlukan. Tidak ada environment variable atau backend yang perlu disiapkan saat ini.
+Gunakan Node.js 24.12+ jika mengerjakan frontend dan backend bersama. Frontend sendiri kompatibel dengan persyaratan Vite 8: 20.19+ atau 22.12+. npm diperlukan. Frontend placeholder saat ini dapat dijalankan tanpa environment variable.
 
 ```bash
 npm ci
@@ -30,7 +30,24 @@ Buka alamat yang ditampilkan terminal Vite.
 | `npm run lint` | Pemeriksaan Oxlint |
 | `npm run preview` | Preview hasil build; jalankan build terlebih dahulu |
 
-Belum tersedia script `npm test` atau suite pengujian browser otomatis. Build/lint harus dilengkapi cek interaksi manual.
+Belum tersedia script `npm test` pada root atau suite pengujian browser otomatis. Backend memiliki test suite tersendiri. Build/lint harus dilengkapi cek interaksi manual.
+
+## Backend konten homepage
+
+Fondasi backend digabungkan dari `feature/homepage-content-backend` ke `feature/navigation`. Tidak ada server custom; database dan REST API disediakan Supabase. Setup, schema, publishing konten, dan kontrak lengkap tersedia di [backend/README.md](backend/README.md); status deployment dicatat di [backend/DEPLOYMENT.md](backend/DEPLOYMENT.md).
+
+Jalankan dari folder `backend/`:
+
+```bash
+npm ci
+npm test
+npm run check
+npm run content:validate
+```
+
+Endpoint publik: `GET /rest/v1/homepage_content?id=eq.home&select=id,content,updated_at`, menggunakan header `apikey` dengan publishable key. Kontrak v1 berisi `hero`, `about`, dan tiga item `journey`. Konten berstatus `example` wajib menampilkan `notice`. Array kosong berarti konten belum tersedia. Frontend perlu loading, error/retry, dan validasi respons; jangan menyembunyikan kegagalan API menggunakan konten dummy.
+
+Contoh konfigurasi frontend ada di `backend/frontend.env.example`: `VITE_SUPABASE_URL` dan `VITE_SUPABASE_PUBLISHABLE_KEY`. Konfigurasi ini belum dipakai aplikasi saat ini. Secret key hanya untuk perintah update tepercaya di backend; jangan memasukkannya ke variabel `VITE_*`. Pemeriksaan hosted API menggunakan `npm run smoke` dari `backend/` setelah environment disiapkan. Test lokal tidak membuktikan deployment hosted berjalan.
 
 ## Struktur project
 

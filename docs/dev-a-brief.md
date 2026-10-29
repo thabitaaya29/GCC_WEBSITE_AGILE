@@ -4,7 +4,13 @@
 
 Bangun homepage yang membantu mahasiswa memahami value GCC dan menemukan titik awal Learn → Apply → Grow. Fokus Sprint 1: Discover yang bisa diklik dan terhubung ke preview. Tidak mencakup registrasi, backend, atau detail program penuh.
 
-Foundation B sudah ada secara lokal: navbar desktop/mobile, routing, preview, token brand, aset, dan Button. Sinkronkan dengan B untuk commit/PR foundation terbaru sebelum mengerjakan integrasi; perubahan lokal belum otomatis tersedia di checkout A.
+Foundation B mencakup navbar desktop/mobile, routing, preview, token brand, aset, dan Button. Backend dari `feature/homepage-content-backend` sudah digabungkan ke `feature/navigation`. Sinkronkan dengan B untuk commit/PR foundation terbaru sebelum mengerjakan integrasi; perubahan lokal belum otomatis tersedia di checkout A.
+
+## Kontrak backend yang sudah tersedia
+
+Baca [backend/README.md](../backend/README.md) dan `backend/homepage.example.json`. Data API menyediakan dokumen `home` dengan `schemaVersion: 1`, `contentStatus`, `notice`, `hero`, `about`, dan `journey`. Respons berupa array satu record dengan field `content`. Hero memiliki CTA Explore GCC ke `#journey`; journey berisi tiga item berurutan Learn/Apply/Grow dengan route yang sama seperti tabel di bawah.
+
+Backend belum tersambung ke frontend. Koordinasikan fetch/data layer dengan B; komponen A sebaiknya menerima data lewat props sesuai field kontrak. Tampilkan notice secara jelas saat `contentStatus === "example"`, render string sebagai teks React, dan siapkan loading, error/retry, serta kondisi konten belum tersedia. Jangan menggunakan secret key di browser. Contoh konfigurasi publik ada di `backend/frontend.env.example`.
 
 ## Scope A
 
